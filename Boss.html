@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Boss Fight Game</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
+    /* Previous styles remain the same */
     * {
       margin: 0;
       padding: 0;
@@ -39,8 +41,24 @@
     .game-container {
       text-align: center;
       width: 90%;
-      max-width: 600px;
+      max-width: 1200px;
       position: relative;
+      display: flex;
+      gap: 20px;
+    }
+
+    .game-content {
+      flex: 1;
+    }
+
+    .stats-container {
+      flex: 0 0 300px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .title {
@@ -183,17 +201,22 @@
 </head>
 <body>
   <div class="game-container">
-    <h1 id="boss-name" class="title">Boss Fight</h1>
-    <div class="boss-container">
-      <video id="boss-image" src="Itachi Norm.mp4" autoplay loop muted></video>
-      <div class="health-bar-container">
-        <div id="health-bar"></div>
+    <div class="game-content">
+      <h1 id="boss-name" class="title">Boss Fight</h1>
+      <div class="boss-container">
+        <video id="boss-image" src="Itachi Norm.mp4" autoplay loop muted></video>
+        <div class="health-bar-container">
+          <div id="health-bar"></div>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="fight-button" class="fight-button">Fight</button>
+        <input type="text" id="attack-input" placeholder="Enter attack code" />
+        <p id="error-message" class="error-message hidden">Invalid code! Try again.</p>
       </div>
     </div>
-    <div class="controls">
-      <button id="fight-button" class="fight-button">Fight</button>
-      <input type="text" id="attack-input" placeholder="Enter attack code" />
-      <p id="error-message" class="error-message hidden">Invalid code! Try again.</p>
+    <div class="stats-container">
+      <canvas id="statsChart"></canvas>
     </div>
   </div>
 
@@ -208,6 +231,71 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // Initialize stats chart
+      const ctx = document.getElementById('statsChart').getContext('2d');
+      const statsChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: ['Intelligence', 'Attack', 'Defense', 'Speed', 'Stamina'],
+          datasets: [{
+            label: 'Itachi Stats',
+            data: [95, 90, 85, 90, 80],
+            backgroundColor: 'rgba(255, 77, 77, 0.4)',
+            borderColor: '#ff4d4d',
+            pointBackgroundColor: '#ff4d4d',
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              labels: {
+                color: '#ffffff',
+                font: {
+                  family: 'Poppins',
+                  size: 12,
+                  weight: '600'
+                }
+              }
+            },
+            title: {
+              display: true,
+              text: 'Character Stats',
+              color: '#ffffff',
+              font: {
+                family: 'Poppins',
+                size: 14,
+                weight: '600'
+              }
+            }
+          },
+          scales: {
+            r: {
+              angleLines: {
+                color: '#444444'
+              },
+              grid: {
+                color: '#555555'
+              },
+              pointLabels: {
+                color: '#ffffff',
+                font: {
+                  family: 'Poppins',
+                  size: 12
+                }
+              },
+              ticks: {
+                display: false
+              },
+              suggestedMin: 0,
+              suggestedMax: 100
+            }
+          }
+        }
+      });
+
+      // Rest of the game logic
       const healthBar = document.getElementById("health-bar");
       const fightButton = document.getElementById("fight-button");
       const attackInput = document.getElementById("attack-input");
