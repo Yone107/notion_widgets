@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boss Fight Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1 id="boss-name" class="title">Boss Fight</h1>
+    <div class="boss-container">
+      <!-- Main boss video -->
+      <video id="boss-image" src="Itachi Norm.mp4" autoplay loop muted></video>
+      <div class="health-bar-container">
+        <div id="health-bar"></div>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="fight-button" class="fight-button">Fight</button>
+      <input type="text" id="attack-input" placeholder="Enter attack code" />
+      <p id="error-message" class="error-message hidden">Invalid code! Try again.</p>
+    </div>
+  </div>
+
+  <!-- Defeated video overlay -->
+  <div id="popup-overlay" class="popup-overlay hidden"></div>
+
+  <!-- Congratulations popup -->
+  <div id="popup" class="popup hidden">
+    <h2>Congratulations! 🎉</h2>
+    <br>
+    <p>You defeated the boss!</p>
+    <button id="next-boss-button" class="fight-button">Next Boss</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
