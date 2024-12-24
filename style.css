@@ -1,0 +1,188 @@
+/* Global Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding and borders are included in element's total width/height */
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #191919, #191919);  
+  color: #fff;
+  overflow: hidden; /* Prevent scrolling during gameplay */
+}
+
+#attack-input {
+  font-family: 'Poppins';
+  margin: 27px auto 0; /* Center the button */
+  background-color: #0f2027;
+  color: white;
+  border: 2px solid #ff5353;
+  border-radius: 6px;
+  padding: 7px;
+  outline: none;
+
+
+}
+
+
+.game-container {
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
+  position: relative; /* For background effects */
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 800;
+  color: #ff4d4d;
+
+}
+
+.boss-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+#boss-image {
+  width: 100%;
+  border-radius: 30px;
+  border: 1.5px solid #ff4d4d;
+}
+
+.health-bar-container {
+  width: 100%; /* Health bar spans full width */
+  margin-top: 20px; /* Position below the video */
+  height: 16px;
+  background: #444;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#health-bar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(110deg, #ff6a5c, #f32c12, #ff5d4e);
+  transition: width 0.7s ease;
+}
+
+.controls {
+  margin-top: 20px;
+}
+
+.fight-button {
+  display: inline-block;
+  margin: 27px auto 0; /* Center the button */
+  padding: 10px 28px;
+  font-size: 16px;
+  font-family: 'Poppins';
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #ff6a5c, #f33412);
+ border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform  0.3s ease-out;
+}
+
+.fight-button:hover {
+  transform: scale(1.2); /* Slightly scale up the button on hover */
+}
+
+#error-message {
+  color: #e74c3c;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Defeated video overlay and cinematic effects */
+.cinematic-bg {
+  filter: blur(5px); /* Blur the background */
+  opacity: 0.3; /* Darken background */
+  transition: all 0.5s ease-in-out;
+}
+
+
+.popup-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed; /* Fixed on the screen */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3); /* Slightly darker background */
+  z-index: 9999;
+  transition: background 0.5s ease, opacity 0.5s ease; /* Smooth transition for both background and opacity */
+}
+
+.popup-overlay video {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: smoothScaleIn 1.6s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+  border-radius: 30px;
+}
+
+/* Continuous and smooth scaling animation */
+@keyframes smoothScaleIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+    filter: blur(10px);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+
+/* Sliding popup for congratulations */
+/* Center the congratulations popup */
+.popup {
+  background: #191919;
+  padding: 60px ;
+  border-radius: 20px;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  position: fixed; /* Fixed in the center of the screen */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5); /* Start small and scaled down */
+  opacity: 0; /* Start invisible */
+  animation: popupShow 1s ease forwards; /* Smooth appearance animation */
+  z-index: 10000; /* Ensure it's above everything else */
+}
+
+/* Smooth animation for popup */
+@keyframes popupShow {
+  0% {
+    transform: translate(-50%, 50%) scale(1); 
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1); 
+    opacity: 1;
+  }
+}
+
+
+/* Utility classes */
+.hidden {
+  display: none;
+}
